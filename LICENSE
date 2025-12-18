@@ -1,0 +1,22 @@
+Contextify CLI - Proprietary Software License
+
+Copyright (c) 2025 Perch Innovations, Inc. All rights reserved.
+
+This software is proprietary and confidential. Unauthorized copying, transfer,
+or reproduction of this software, via any medium, is strictly prohibited.
+
+The software is provided "as is", without warranty of any kind, express or
+implied, including but not limited to the warranties of merchantability,
+fitness for a particular purpose and noninfringement. In no event shall the
+authors or copyright holders be liable for any claim, damages or other
+liability, whether in an action of contract, tort or otherwise, arising from,
+out of or in connection with the software or the use or other dealings in
+the software.
+
+This software is licensed, not sold. You may use this software only in
+conjunction with Contextify.app. Redistribution of this software outside
+of the official Homebrew tap (github.com/PeterPym/homebrew-contextify) is
+prohibited without express written permission.
+
+For licensing inquiries: support@contextify.sh
+For more information: https://contextify.sh/terms
