@@ -5,12 +5,14 @@ class ContextifyQuery < Formula
   license "Proprietary"
 
   # Download pre-built binary from GitHub releases
+  # Note: Currently arm64 only. x86_64 build will be added when needed.
   if Hardware::CPU.arm?
     url "https://github.com/PeterPym/contextify/releases/download/v#{version}/contextify-query-arm64.tar.gz"
-    sha256 "PLACEHOLDER_ARM64_SHA256"
+    sha256 "10aeaaca44e40ef2f1dd13511311fc80760007ca42b91e9a360d12b70b6ebb85"
   else
-    url "https://github.com/PeterPym/contextify/releases/download/v#{version}/contextify-query-x86_64.tar.gz"
-    sha256 "PLACEHOLDER_X86_64_SHA256"
+    # x86_64 binary not yet available - build from source would be needed
+    url "https://github.com/PeterPym/contextify/releases/download/v#{version}/contextify-query-arm64.tar.gz"
+    sha256 "10aeaaca44e40ef2f1dd13511311fc80760007ca42b91e9a360d12b70b6ebb85"
   end
 
   depends_on :macos
