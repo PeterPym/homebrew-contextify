@@ -20,7 +20,10 @@ class ContextifyQuery < Formula
   def install
     bin.install "contextify-query"
     # Install plugin files for `contextify-query install-plugin` command
-    (share/"claude-plugin").install Dir["claude-plugin/*"] if File.directory?("claude-plugin")
+    # Use Dir.glob with File::FNM_DOTMATCH to include hidden directories like .claude-plugin
+    if File.directory?("claude-plugin")
+      (share/"claude-plugin").install Dir.glob("claude-plugin/*", File::FNM_DOTMATCH).reject { |f| f =~ /\/\.\.?$/ }
+    end
   end
 
   def caveats
