@@ -8,11 +8,11 @@ class ContextifyQuery < Formula
   # Note: Currently arm64 only. x86_64 build will be added when needed.
   if Hardware::CPU.arm?
     url "https://github.com/PeterPym/contextify/releases/download/v#{version}/contextify-query-arm64.tar.gz"
-    sha256 "156c0a453ee0d41946dca80111ab3889b422a6bc12b733fa89defbeed1da26c2"
+    sha256 "6ae0390d94dda7c0446f6971674215bfa91d5ff0cf63b3c59fd841f514e578b2"
   else
     # x86_64 binary not yet available - using arm64 for now (runs via Rosetta)
     url "https://github.com/PeterPym/contextify/releases/download/v#{version}/contextify-query-arm64.tar.gz"
-    sha256 "156c0a453ee0d41946dca80111ab3889b422a6bc12b733fa89defbeed1da26c2"
+    sha256 "6ae0390d94dda7c0446f6971674215bfa91d5ff0cf63b3c59fd841f514e578b2"
   end
 
   depends_on :macos
