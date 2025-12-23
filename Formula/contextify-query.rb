@@ -1,18 +1,18 @@
 class ContextifyQuery < Formula
   desc "CLI for querying Contextify database - enables Claude Code/Codex skills"
   homepage "https://contextify.sh"
-  version "1.0.6"
+  version "1.0.7"
   license "Proprietary"
 
   # Download pre-built binary from GitHub releases
   # Note: Currently arm64 only. x86_64 build will be added when needed.
   if Hardware::CPU.arm?
     url "https://github.com/PeterPym/contextify/releases/download/v#{version}/contextify-query-arm64.tar.gz"
-    sha256 "631a249f36c1ef3500848233b664b59ad513a7219383efed66ddc01e7ee28089"
+    sha256 "d306f74459ba19bb510f63a7e96f021717e9a9fa4487d2ca9f0035a68c4656a8"
   else
     # x86_64 binary not yet available - using arm64 for now (runs via Rosetta)
     url "https://github.com/PeterPym/contextify/releases/download/v#{version}/contextify-query-arm64.tar.gz"
-    sha256 "631a249f36c1ef3500848233b664b59ad513a7219383efed66ddc01e7ee28089"
+    sha256 "d306f74459ba19bb510f63a7e96f021717e9a9fa4487d2ca9f0035a68c4656a8"
   end
 
   depends_on :macos
@@ -23,6 +23,10 @@ class ContextifyQuery < Formula
     # Use Dir.glob with File::FNM_DOTMATCH to include hidden directories like .claude-plugin
     if File.directory?("claude-plugin")
       (share/"claude-plugin").install Dir.glob("claude-plugin/*", File::FNM_DOTMATCH).reject { |f| f =~ /\/\.\.?$/ }
+    end
+    # Install user skill for Total Recall feature
+    if File.directory?("user-skill")
+      (share/"user-skill").install Dir.glob("user-skill/*")
     end
   end
 
