@@ -34,8 +34,12 @@ class ContextifyQuery < Formula
     <<~EOS
       contextify-query has been installed.
 
-      To enable Contextify skills in Claude Code, run:
+      To enable Contextify skills in Claude Code and Codex CLI, run:
         contextify-query install-plugin
+
+      This installs the Total Recall skill to:
+        - ~/.claude/skills/total-recall/  (Claude Code)
+        - ~/.codex/skills/total-recall/   (Codex CLI)
 
       Requires Contextify.app for database access.
 
