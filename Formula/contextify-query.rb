@@ -7,10 +7,10 @@ class ContextifyQuery < Formula
   # Download pre-built binary from GitHub releases
   if Hardware::CPU.arm?
     url "https://github.com/PeterPym/contextify/releases/download/v#{version}/contextify-arm64.tar.gz"
-    sha256 "4ec259e45cd06dcb623b5f6c271fa1dfe882925796528247391a38d0be37a1ce"
+    sha256 "2ff59dd73303bb8a0a42c1c570e260785e32cfc832392a9e81ae78169117e76a"
   else
     url "https://github.com/PeterPym/contextify/releases/download/v#{version}/contextify-x86_64.tar.gz"
-    sha256 "53dfe9a0c873176b147e7fee18b85b1df75004997e97a07bf1835aa72175727f"
+    sha256 "f191917386e342cd4fbbc473225097844b692c1a0e0a19eba5dc0eea862f90b0"
   end
 
   depends_on :macos
