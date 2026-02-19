@@ -10,7 +10,7 @@ class ContextifyQuery < Formula
     sha256 "0cacec10935a1eff652111c4ae527890bb7bd05bd32d167418c51404ec3962bc"
   else
     url "https://github.com/PeterPym/contextify/releases/download/v#{version}/contextify-x86_64.tar.gz"
-    sha256 "PENDING_LINUX_CI_BUILD"
+    sha256 "7b853e11a417959ac44240f142233fd302c830f7aa89123d4e820bb063e89f8a"
   end
 
   depends_on :macos
