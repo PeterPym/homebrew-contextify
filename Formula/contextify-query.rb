@@ -2,7 +2,7 @@ class ContextifyQuery < Formula
   desc "CLI for querying Contextify database - enables Claude Code/Codex skills"
   homepage "https://contextify.sh"
   version "1.7.4"
-  license "Proprietary"
+  license :cannot_represent
 
   # Download pre-built binary from GitHub releases
   if Hardware::CPU.arm?
@@ -24,12 +24,10 @@ class ContextifyQuery < Formula
 
     # Install plugin files for `contextify install-plugin` command
     if File.directory?("claude-plugin")
-      (share/"claude-plugin").install Dir.glob("claude-plugin/*", File::FNM_DOTMATCH).reject { |f| f =~ /\/\.\.?$/ }
+      (share/"claude-plugin").install Dir.glob("claude-plugin/*", File::FNM_DOTMATCH).grep_v(%r{/\.\.?$})
     end
     # Install user skill for Total Recall feature
-    if File.directory?("user-skill")
-      (share/"user-skill").install Dir.glob("user-skill/*")
-    end
+    (share/"user-skill").install Dir.glob("user-skill/*") if File.directory?("user-skill")
   end
 
   def caveats
