@@ -32,7 +32,19 @@ class ContextifyQuery < Formula
     # exists (declared exception `no-macos-marketplace-flow` in
     # scripts/release/lib/cli-companions.manifest in the main repo).
     %w[claude-plugin user-skill codex-agent].each do |companion|
-      odie "#{companion}/ missing from CLI tarball (ct-3803 bug class)" unless File.directory?(companion)
+      unless File.directory?(companion)
+        odie <<~MSG
+          Can't finish installing contextify-query: '#{companion}/' is missing from the release tarball.
+          This is a packaging bug on our side, not anything you did, and it means the CLI would not be
+          able to install one of its integrations (the Codex researcher agent or a Claude Code skill).
+
+          Please report it so we can ship a fix quickly:
+            email:  rob@contextify.sh
+            issue:  https://github.com/PeterPym/contextify/issues/new?template=bug_report.md
+
+          Include the version above and this message. Thanks for flagging it.
+        MSG
+      end
       (share/companion).install Dir.glob("#{companion}/*", File::FNM_DOTMATCH).grep_v(%r{/\.\.?$})
     end
   end
