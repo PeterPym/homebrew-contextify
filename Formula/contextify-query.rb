@@ -22,12 +22,19 @@ class ContextifyQuery < Formula
     bin.install_symlink "contextify" => "contextify-query"
     bin.install_symlink "contextify" => "contextify-ingest"
 
-    # Install plugin files for `contextify install-plugin` command
-    if File.directory?("claude-plugin")
-      (share/"claude-plugin").install Dir.glob("claude-plugin/*", File::FNM_DOTMATCH).grep_v(%r{/\.\.?$})
+    # Companion payload consumed by `contextify install-plugin` (ct-3803).
+    # The CLI resolves each at <prefix>/share/<name>; a tarball missing one of
+    # these dirs is a broken release artifact, so fail the install loudly
+    # instead of pouring a bottle that silently cannot install the Codex
+    # researcher agent (PeterPym/contextify#4). FNM_DOTMATCH keeps hidden
+    # entries like claude-plugin/.claude-plugin/plugin.json.
+    # codex-plugin is deliberately NOT installed: no macOS marketplace flow
+    # exists (declared exception `no-macos-marketplace-flow` in
+    # scripts/release/lib/cli-companions.manifest in the main repo).
+    %w[claude-plugin user-skill codex-agent].each do |companion|
+      odie "#{companion}/ missing from CLI tarball (ct-3803 bug class)" unless File.directory?(companion)
+      (share/companion).install Dir.glob("#{companion}/*", File::FNM_DOTMATCH).grep_v(%r{/\.\.?$})
     end
-    # Install user skill for Total Recall feature
-    (share/"user-skill").install Dir.glob("user-skill/*") if File.directory?("user-skill")
   end
 
   def caveats
@@ -63,5 +70,11 @@ class ContextifyQuery < Formula
     assert_match "contextify", shell_output("#{bin}/contextify --version")
     # Check symlink works
     assert_match "contextify", shell_output("#{bin}/contextify-query --version")
+    # Installed companion layout: every path the CLI resolver reads from the
+    # Cellar must exist, or install-plugin silently skips that payload (ct-3803).
+    assert_path_exists share/"claude-plugin/agents/contextify-researcher.md"
+    assert_path_exists share/"claude-plugin/.claude-plugin/plugin.json"
+    assert_path_exists share/"user-skill/total-recall/SKILL.md"
+    assert_path_exists share/"codex-agent/contextify-researcher.toml"
   end
 end
