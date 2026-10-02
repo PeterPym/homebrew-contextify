@@ -1,8 +1,20 @@
 # Homebrew Tap for Contextify
 
-This tap contains Homebrew formulae for [Contextify](https://contextify.sh) tools.
+This tap contains the Homebrew cask for the [Contextify](https://contextify.sh) app and the formula for its CLI.
 
 ## Installation
+
+### The Contextify App
+
+```bash
+brew install --cask peterpym/contextify/contextify
+```
+
+The app updates itself after that. Use the full `peterpym/contextify/contextify` name: Homebrew 7
+only installs from this tap when you name it, and a bare `contextify` can also match a cask in
+another tap.
+
+### The CLI Only
 
 ```bash
 brew install PeterPym/contextify/contextify-cli
