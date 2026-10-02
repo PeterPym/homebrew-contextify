@@ -1,4 +1,4 @@
-class ContextifyQuery < Formula
+class ContextifyCli < Formula
   desc "CLI for querying Contextify database - enables Claude Code/Codex skills"
   homepage "https://contextify.sh"
   version "1.8.2"
@@ -18,7 +18,9 @@ class ContextifyQuery < Formula
   def install
     # Install unified binary as 'contextify' (primary)
     bin.install "contextify"
-    # Create backwards-compatible symlinks
+    # Backwards-compatible command names. The formula was named contextify-query
+    # until 1.8.3 (formula_renames.json migrates those installs). Keep the
+    # contextify-query command until at least 2027-04-01 (ct-5161).
     bin.install_symlink "contextify" => "contextify-query"
     bin.install_symlink "contextify" => "contextify-ingest"
 
@@ -34,7 +36,7 @@ class ContextifyQuery < Formula
     %w[claude-plugin user-skill codex-agent].each do |companion|
       unless File.directory?(companion)
         odie <<~MSG
-          Can't finish installing contextify-query: '#{companion}/' is missing from the release tarball.
+          Can't finish installing contextify-cli: '#{companion}/' is missing from the release tarball.
           This is a packaging bug on our side, not anything you did, and it means the CLI would not be
           able to install one of its integrations (the Codex researcher agent or a Claude Code skill).
 
@@ -70,7 +72,11 @@ class ContextifyQuery < Formula
         2. Open Contextify once to initialize the database
         3. Run: contextify status
 
-      Note: 'contextify-query' still works for backwards compatibility.
+      This formula was renamed from contextify-query. The 'contextify-query'
+      command still works for backwards compatibility.
+
+      Update with:
+        brew upgrade peterpym/contextify/contextify-cli
 
       For more information:
         https://contextify.sh/docs/cli
