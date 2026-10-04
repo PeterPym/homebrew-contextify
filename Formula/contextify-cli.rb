@@ -1,16 +1,16 @@
 class ContextifyCli < Formula
   desc "CLI for querying Contextify database - enables Claude Code/Codex skills"
   homepage "https://contextify.sh"
-  version "1.8.2"
+  version "1.8.3"
   license :cannot_represent
 
   # Download pre-built binary from GitHub releases
   if Hardware::CPU.arm?
     url "https://github.com/PeterPym/contextify/releases/download/v#{version}/contextify-arm64.tar.gz"
-    sha256 "7e1b9f5cc4765a91d503ac5b00a110441d42cbdeaefffe2d40fdf27c550a0c43"
+    sha256 "00cf17947dc7eaae22ac9042538cb3f83dabbc9355129591894478b083552701"
   else
     url "https://github.com/PeterPym/contextify/releases/download/v#{version}/contextify-x86_64.tar.gz"
-    sha256 "4c96902d117abb9eadb3b91a6e615e42b3bfc35f751ec38ab17620c6d5c319eb"
+    sha256 "764950cbc2a64845804c0b05f9ab19a9e607c90f7b096708fa3240b4dc9a7e54"
   end
 
   depends_on :macos
