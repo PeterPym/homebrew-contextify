@@ -15,6 +15,12 @@ class ContextifyCli < Formula
 
   depends_on :macos
 
+  # ct-5238: the Contextify.app (DMG) installs its own `contextify` shim into
+  # this bin directory when it is writable. That shim is a regular file no keg
+  # owns, so without this a brew install or upgrade cannot link and exits 1.
+  # Homebrew replaces only files that belong to no other keg.
+  link_overwrite "bin/contextify", "bin/contextify-query", "bin/contextify-ingest"
+
   def install
     # Install unified binary as 'contextify' (primary)
     bin.install "contextify"
